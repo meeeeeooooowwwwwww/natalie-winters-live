@@ -3,10 +3,18 @@ const baseConfig = require('./next.config.base')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   ...baseConfig,
-  output: 'export',
-  basePath: '', // No base path for Cloudflare Pages
+  // Cloudflare specific settings
+  output: 'standalone',
+  // Enable Cloudflare-specific optimizations
+  experimental: {
+    appDir: true,
+    serverActions: true,
+  },
+  // Optimize for Cloudflare's edge network
   images: {
-    unoptimized: true, // Required for static export
+    ...baseConfig.images,
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
   },
 }
 
