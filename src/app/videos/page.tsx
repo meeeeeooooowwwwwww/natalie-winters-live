@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Video, VideoResponse } from '@/types/video'
+import { Video } from '@/types/video'
 import { getVideos, formatDuration, formatDate } from '@/utils/videoUtils'
 
 const ITEMS_PER_PAGE = 12

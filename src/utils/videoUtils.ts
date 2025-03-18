@@ -1,4 +1,4 @@
-import { Video, VideoResponse } from '@/types/video';
+import { VideoResponse } from '@/types/video';
 
 export async function getVideos(page: number = 1, pageSize: number = 12): Promise<VideoResponse> {
   try {

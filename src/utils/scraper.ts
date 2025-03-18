@@ -1,20 +1,6 @@
 import axios from 'axios';
 import { Video } from '@/types/video';
 
-interface RumbleVideo {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  date: string;
-  duration: string;
-  link: string;
-  views: number;
-  comments: number;
-  category?: string;
-  tags?: string[];
-}
-
 export async function scrapeWarRoomVideos(): Promise<Video[]> {
   try {
     // Rumble API endpoint for Bannon's War Room channel
@@ -28,6 +14,7 @@ export async function scrapeWarRoomVideos(): Promise<Video[]> {
     const videoElements = response.data.match(/<div class="video-item"[^>]*>[\s\S]*?<\/div>/g) || [];
     
     for (const element of videoElements) {
+      const link = extractLink(element);
       const video: Video = {
         id: extractVideoId(element),
         title: extractTitle(element),
@@ -35,7 +22,9 @@ export async function scrapeWarRoomVideos(): Promise<Video[]> {
         thumbnail: extractThumbnail(element),
         date: extractDate(element),
         duration: extractDuration(element),
-        link: extractLink(element),
+        url: link,
+        link: link,
+        embed_url: `https://rumble.com/embed/${extractVideoId(element)}/?pub=4kxtac`,
         views: extractViews(element),
         comments: extractComments(element),
         category: extractCategory(element),

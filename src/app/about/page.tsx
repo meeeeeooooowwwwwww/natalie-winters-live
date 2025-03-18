@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function About() {
   return (
@@ -83,24 +84,24 @@ export default function About() {
           <div>
             <h2 className="text-2xl font-bold mb-4">Latest Coverage</h2>
             <div className="space-y-4">
-              <a
+              <Link
                 href="/videos"
                 className="block text-white hover:text-gray-300 transition-colors"
               >
                 Latest Videos
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/news"
                 className="block text-white hover:text-gray-300 transition-colors"
               >
                 News Articles
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/latest-posts"
                 className="block text-white hover:text-gray-300 transition-colors"
               >
                 Latest Posts
-              </a>
+              </Link>
             </div>
           </div>
         </div>

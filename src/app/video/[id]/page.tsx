@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { use } from 'react'
 import Link from 'next/link'
 import { Video } from '@/types/video'
@@ -12,11 +12,7 @@ export default function VideoPage({ params }: { params: Promise<{ id: string }> 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    loadVideo()
-  }, [resolvedParams.id])
-
-  const loadVideo = async () => {
+  const loadVideo = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -33,7 +29,11 @@ export default function VideoPage({ params }: { params: Promise<{ id: string }> 
     } finally {
       setLoading(false)
     }
-  }
+  }, [resolvedParams.id])
+
+  useEffect(() => {
+    loadVideo()
+  }, [loadVideo])
 
   if (loading) {
     return (
