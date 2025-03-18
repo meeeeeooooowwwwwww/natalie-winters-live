@@ -24,7 +24,10 @@ jobs:
         run: npm ci
         
       - name: Build for GitHub Pages
-        run: npm run build:github
+        run: |
+          cp .env.github .env
+          npm run build
+          npm run export
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
