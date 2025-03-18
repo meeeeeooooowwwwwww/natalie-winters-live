@@ -1,6 +1,5 @@
 'use client'
 
-import { Video } from '@/types/video'
 import { formatDate } from '@/utils/videoUtils'
 
 export default function VideoPage({ params }: { params: { id: string } }) {
