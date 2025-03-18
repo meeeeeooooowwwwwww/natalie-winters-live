@@ -43,3 +43,6 @@ __pycache__/
 env/
 venv/
 ENV/
+
+# warroom-scraper
+/warroom-scraper/
