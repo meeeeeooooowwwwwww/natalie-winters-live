@@ -1,3 +1,4 @@
+# GitHub Actions workflow for deploying to GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
@@ -24,9 +25,7 @@ jobs:
         run: npm ci
         
       - name: Build for GitHub Pages
-        run: |
-          cp .env.github .env
-          npm run build
+        run: npm run build:github
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
