@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "scrape": "ts-node scripts/scrape-videos.ts",
-    "build:github": "next build && next export",
-    "build:production": "cp .env.production .env && next build",
-    "build:development": "cp .env.development .env && next build",
+    "build:github": "cp next.config.github.js next.config.js && next build && next export",
+    "build:production": "cp .env.production .env && cp next.config.cloudflare.js next.config.js && next build",
+    "build:development": "cp .env.development .env && cp next.config.development.js next.config.js && next build",
     "export": "next export",
     "deploy:github": "npm run build:github && touch out/.nojekyll && cp -r out/* .git/gh-pages/",
     "deploy:cloudflare": "npm run build:production && wrangler pages deploy out"

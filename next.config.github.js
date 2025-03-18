@@ -1,9 +1,12 @@
+const baseConfig = require('./next.config.base')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...baseConfig,
   output: 'export',
   basePath: '/natalie-winters-live',
   images: {
-    unoptimized: true,
+    unoptimized: true, // Required for static export
   },
 }
 

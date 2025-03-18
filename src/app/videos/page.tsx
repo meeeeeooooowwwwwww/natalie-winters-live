@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Video } from '@/types/video'
-import { getVideos, formatDuration, formatDate } from '@/utils/videoUtils'
+import { getVideos, formatDate } from '@/utils/videoUtils'
 
 const ITEMS_PER_PAGE = 12
 
@@ -39,11 +39,7 @@ export default function Videos() {
   const [hasMore, setHasMore] = useState(true)
   const [total, setTotal] = useState(0)
 
-  useEffect(() => {
-    loadVideos()
-  }, [page])
-
-  const loadVideos = async () => {
+  const loadVideos = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -57,7 +53,11 @@ export default function Videos() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [page])
+
+  useEffect(() => {
+    loadVideos()
+  }, [loadVideos])
 
   const loadMore = () => {
     if (!loading && hasMore) {
@@ -110,9 +110,6 @@ export default function Videos() {
                 <div className="flex items-center gap-4 text-sm text-gray-400 mt-1">
                   {video.date && (
                     <span>{formatDate(video.date)}</span>
-                  )}
-                  {video.duration && (
-                    <span>{video.duration}</span>
                   )}
                 </div>
               </div>
